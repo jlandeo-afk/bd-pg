@@ -1,0 +1,38 @@
+-- Table: odiseo.material_ballot_stats_areas
+-- Includes constraints and indexes
+
+--
+
+CREATE TABLE odiseo.material_ballot_stats_areas (
+    id bigint NOT NULL,
+    global_stats_id bigint NOT NULL,
+    area_name character varying(100) NOT NULL,
+    total_questions smallint DEFAULT 0,
+    new_questions smallint DEFAULT 0,
+    repeated_year smallint DEFAULT 0,
+    repeated_history smallint DEFAULT 0,
+    deleted_at timestamp without time zone,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE odiseo.material_ballot_stats_areas OWNER TO postgres;
+
+--
+
+--
+
+ALTER TABLE ONLY odiseo.material_ballot_stats_areas
+    ADD CONSTRAINT material_ballot_stats_areas_pkey PRIMARY KEY (id);
+
+
+--
+
+--
+
+ALTER TABLE ONLY odiseo.material_ballot_stats_areas
+    ADD CONSTRAINT fk_stats_areas_global FOREIGN KEY (global_stats_id) REFERENCES odiseo.material_ballot_stats_global(id) ON DELETE CASCADE;
+
+
+--

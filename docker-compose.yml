@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:16-alpine # Utiliza la versión exacta de tu entorno de producción
+    container_name: db_standalone_postgres
+    environment:
+      POSTGRES_DB: mi_proyecto_db
+      POSTGRES_USER: dba_admin
+      POSTGRES_PASSWORD: super_secure_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./conf/postgresql.conf:/etc/postgresql/postgresql.conf
+    command: "postgres -c config_file=/etc/postgresql/postgresql.conf"
+
+volumes:
+  pgdata:
