@@ -1,14 +1,18 @@
 import os
 import re
 
+def get_domain_path(schema, subfolder):
+    domain = schema.strip().lower()
+    if domain in ("public", "odiseo"):
+        domain = "common"
+    dir_path = f"src/{domain}/{subfolder}"
+    os.makedirs(dir_path, exist_ok=True)
+    return dir_path
+
 def main():
     # 1. Create directory structure
     dirs = [
         "src/schemas",
-        "src/tables",
-        "src/views",
-        "src/functions",
-        "src/triggers",
         "src/roles",
         "migrations"
     ]
@@ -250,7 +254,8 @@ def main():
 
     # 4.2 Write Tables
     for (schema, table_name), sqls in table_files.items():
-        filename = f"src/tables/{schema}.{table_name}.sql"
+        domain_dir = get_domain_path(schema, "tables")
+        filename = f"{domain_dir}/{table_name}.sql"
         with open(filename, "w", encoding="utf-8") as f:
             f.write(f"-- Table: {schema}.{table_name}\n")
             f.write(f"-- Includes constraints and indexes\n\n")
@@ -260,7 +265,8 @@ def main():
     # 4.3 Write Views
     for v in views_list:
         v_name_clean = sanitize_filename(v["name"])
-        filename = f"src/views/{v['schema']}.{v_name_clean}.sql"
+        domain_dir = get_domain_path(v["schema"], "views")
+        filename = f"{domain_dir}/{v_name_clean}.sql"
         with open(filename, "w", encoding="utf-8") as f:
             f.write(f"-- View: {v['schema']}.{v['name']}\n\n")
             f.write(v["sql"] + "\n")
@@ -270,10 +276,12 @@ def main():
     for fn in functions_list:
         fn_name_clean = sanitize_filename(fn["name"])
         if fn["is_trigger_fn"]:
-            filename = f"src/triggers/{fn['schema']}.{fn_name_clean}.sql"
+            domain_dir = get_domain_path(fn["schema"], "triggers")
+            filename = f"{domain_dir}/{fn_name_clean}.sql"
             header = f"-- Trigger Function: {fn['schema']}.{fn['name']}\n\n"
         else:
-            filename = f"src/functions/{fn['schema']}.{fn_name_clean}.sql"
+            domain_dir = get_domain_path(fn["schema"], "functions")
+            filename = f"{domain_dir}/{fn_name_clean}.sql"
             header = f"-- Function: {fn['schema']}.{fn['name']}\n\n"
             
         with open(filename, "w", encoding="utf-8") as f:
@@ -283,9 +291,11 @@ def main():
 
     # 4.5 Write Triggers (bindings)
     if triggers_list:
-        with open("src/triggers/triggers.sql", "w", encoding="utf-8") as f:
+        domain_dir = get_domain_path("common", "triggers")
+        filename = f"{domain_dir}/triggers.sql"
+        with open(filename, "w", encoding="utf-8") as f:
             f.write("-- Trigger Bindings\n\n" + "\n\n".join(triggers_list) + "\n")
-        print("Generated src/triggers/triggers.sql")
+        print(f"Generated {filename}")
 
     # 5. Generate baseline_schema.sql
     print("Generating migrations/V1.0.0__baseline_schema.sql...")

@@ -8,7 +8,7 @@ CREATE MATERIALIZED VIEW odiseo.vm_material_exam_parent_question_with_subquestio
             mepq.course_id,
             mepq.parent_question_id,
             jsonb_array_elements(mepq.subquestion) AS subquestion
-           FROM odiseo.material_exam_parent_question mepq
+           FROM materials.material_exam_parent_question mepq
           WHERE ((1 = 1) AND (mepq.deleted_at IS NULL) AND (mepq.parent_question_id IS NOT NULL))
         ), subquestions_to_extract AS (
          SELECT pj.material_exam_area_week_id,
@@ -24,11 +24,11 @@ CREATE MATERIALIZED VIEW odiseo.vm_material_exam_parent_question_with_subquestio
     sext.question_id,
     q_hc.id AS question_history_id
    FROM (((((subquestions_to_extract sext
-     JOIN odiseo.material_exam_area_week meaw ON ((meaw.id = sext.material_exam_area_week_id)))
-     JOIN odiseo.detail_week_type_mat dwtm ON ((dwtm.id = meaw.week_type_material_id)))
-     JOIN odiseo.material m ON ((m.id = dwtm.material_id)))
-     LEFT JOIN odiseo.question_history_cycle q_hc ON (((q_hc.fl_status IS TRUE) AND (q_hc.cycle_id = m.cycle_id) AND (q_hc.university_id = m.university_id) AND (q_hc.headquarters_id = m.headquarte_id) AND (q_hc.question_id = sext.question_id))))
-     LEFT JOIN odiseo.question_history_cycle p_hc ON (((p_hc.fl_status IS TRUE) AND (p_hc.cycle_id = m.cycle_id) AND (p_hc.university_id = m.university_id) AND (p_hc.headquarters_id = m.headquarte_id) AND (p_hc.parent_question_id = sext.parent_question_id))))
+     JOIN materials.material_exam_area_week meaw ON ((meaw.id = sext.material_exam_area_week_id)))
+     JOIN academic.detail_week_type_mat dwtm ON ((dwtm.id = meaw.week_type_material_id)))
+     JOIN materials.material m ON ((m.id = dwtm.material_id)))
+     LEFT JOIN questions.question_history_cycle q_hc ON (((q_hc.fl_status IS TRUE) AND (q_hc.cycle_id = m.cycle_id) AND (q_hc.university_id = m.university_id) AND (q_hc.headquarters_id = m.headquarte_id) AND (q_hc.question_id = sext.question_id))))
+     LEFT JOIN questions.question_history_cycle p_hc ON (((p_hc.fl_status IS TRUE) AND (p_hc.cycle_id = m.cycle_id) AND (p_hc.university_id = m.university_id) AND (p_hc.headquarters_id = m.headquarte_id) AND (p_hc.parent_question_id = sext.parent_question_id))))
   WITH NO DATA;
 
 
