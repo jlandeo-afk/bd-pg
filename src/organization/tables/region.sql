@@ -4,15 +4,15 @@
 --
 
 CREATE TABLE organization.region (
-    id bigint NOT NULL,
-    name character varying(255) NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -22,32 +22,32 @@ ALTER TABLE organization.region OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY organization.region
-    ADD CONSTRAINT region_pkey PRIMARY KEY (id);
+ALTER TABLE organization.region
+    ADD CONSTRAINT pk_region PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.region
-    ADD CONSTRAINT odiseo_region_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE organization.region
+    ADD CONSTRAINT fk_region_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.region
-    ADD CONSTRAINT odiseo_region_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE organization.region
+    ADD CONSTRAINT fk_region_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.region
-    ADD CONSTRAINT odiseo_region_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE organization.region
+    ADD CONSTRAINT fk_region_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

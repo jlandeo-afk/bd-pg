@@ -4,25 +4,25 @@
 --
 
 CREATE TABLE materials.separated_material_week (
-    id bigint NOT NULL,
-    material_id bigint NOT NULL,
+    id BIGINT NOT NULL,
+    material_id BIGINT NOT NULL,
     type_material_id smallint NOT NULL,
     week smallint NOT NULL,
-    fl_solution boolean NOT NULL,
-    fl_quality boolean NOT NULL,
-    week_type_material_ids character varying(255),
+    fl_solution BOOLEAN NOT NULL,
+    fl_quality BOOLEAN NOT NULL,
+    week_type_material_ids VARCHAR(255),
     course_id smallint NOT NULL,
     fl_process_status smallint DEFAULT '1'::smallint NOT NULL,
-    url_material character varying(255),
-    job_id character varying(255),
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    fl_course_active boolean DEFAULT true NOT NULL
+    url_material VARCHAR(255),
+    job_id VARCHAR(255),
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    fl_course_active BOOLEAN DEFAULT true NOT NULL
 );
 
 
@@ -32,56 +32,56 @@ ALTER TABLE materials.separated_material_week OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY materials.separated_material_week
-    ADD CONSTRAINT separated_material_week_pkey PRIMARY KEY (id);
+ALTER TABLE materials.separated_material_week
+    ADD CONSTRAINT pk_separated_material_week PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.separated_material_week
-    ADD CONSTRAINT odiseo_separated_material_week_course_id_foreign FOREIGN KEY (course_id) REFERENCES academic.course(id);
+ALTER TABLE materials.separated_material_week
+    ADD CONSTRAINT fk_separated_material_week_course FOREIGN KEY (course_id) REFERENCES academic.course(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.separated_material_week
-    ADD CONSTRAINT odiseo_separated_material_week_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE materials.separated_material_week
+    ADD CONSTRAINT fk_separated_material_week_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.separated_material_week
-    ADD CONSTRAINT odiseo_separated_material_week_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE materials.separated_material_week
+    ADD CONSTRAINT fk_separated_material_week_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.separated_material_week
-    ADD CONSTRAINT odiseo_separated_material_week_material_id_foreign FOREIGN KEY (material_id) REFERENCES materials.material(id);
+ALTER TABLE materials.separated_material_week
+    ADD CONSTRAINT fk_separated_material_week_material FOREIGN KEY (material_id) REFERENCES materials.material(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.separated_material_week
-    ADD CONSTRAINT odiseo_separated_material_week_type_material_id_foreign FOREIGN KEY (type_material_id) REFERENCES materials.type_material(id);
+ALTER TABLE materials.separated_material_week
+    ADD CONSTRAINT fk_separated_material_week_type_material FOREIGN KEY (type_material_id) REFERENCES materials.type_material(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.separated_material_week
-    ADD CONSTRAINT odiseo_separated_material_week_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE materials.separated_material_week
+    ADD CONSTRAINT fk_separated_material_week_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

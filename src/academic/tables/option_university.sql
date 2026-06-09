@@ -4,15 +4,15 @@
 --
 
 CREATE TABLE academic.option_university (
-    id bigint NOT NULL,
-    name character varying(255),
-    university_id bigint,
-    created_by bigint NOT NULL,
-    created_at timestamp(0) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_by bigint,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    deleted_by bigint
+    id BIGINT NOT NULL,
+    name VARCHAR(255),
+    university_id BIGINT,
+    created_by BIGINT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_by BIGINT,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    deleted_by BIGINT
 );
 
 
@@ -22,16 +22,16 @@ ALTER TABLE academic.option_university OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY academic.option_university
-    ADD CONSTRAINT option_university_pkey PRIMARY KEY (id);
+ALTER TABLE academic.option_university
+    ADD CONSTRAINT pk_option_university PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.option_university
-    ADD CONSTRAINT option_university_university_id_foreign FOREIGN KEY (university_id) REFERENCES academic.origin_university(id);
+ALTER TABLE academic.option_university
+    ADD CONSTRAINT fk_option_university_university FOREIGN KEY (university_id) REFERENCES academic.origin_university(id);
 
 
 --

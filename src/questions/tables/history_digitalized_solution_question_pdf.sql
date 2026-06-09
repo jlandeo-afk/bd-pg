@@ -4,12 +4,12 @@
 --
 
 CREATE TABLE questions.history_digitalized_solution_question_pdf (
-    id bigint NOT NULL,
-    question_id bigint NOT NULL,
-    status character varying(5) NOT NULL,
-    url character varying(255),
-    original_created_at timestamp(0) without time zone,
-    created_at timestamp(0) without time zone DEFAULT CURRENT_TIMESTAMP
+    id BIGINT NOT NULL,
+    question_id BIGINT NOT NULL,
+    status VARCHAR(5) NOT NULL,
+    url VARCHAR(255),
+    original_created_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -19,16 +19,16 @@ ALTER TABLE questions.history_digitalized_solution_question_pdf OWNER TO postgre
 
 --
 
-ALTER TABLE ONLY questions.history_digitalized_solution_question_pdf
-    ADD CONSTRAINT history_digitalized_solution_question_pdf_pkey PRIMARY KEY (id);
+ALTER TABLE questions.history_digitalized_solution_question_pdf
+    ADD CONSTRAINT pk_history_digitalized_solution_question_pdf PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.history_digitalized_solution_question_pdf
-    ADD CONSTRAINT odiseo_history_digitalized_solution_question_pdf_question_id_fo FOREIGN KEY (question_id) REFERENCES questions.question(id);
+ALTER TABLE questions.history_digitalized_solution_question_pdf
+    ADD CONSTRAINT fk_history_digitalized_solution_question_pdf_question FOREIGN KEY (question_id) REFERENCES questions.question(id);
 
 
 --

@@ -5,12 +5,12 @@
 
 CREATE TABLE common.type_archive (
     id smallint NOT NULL,
-    name character varying(20) NOT NULL,
-    extension character varying(255) NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
+    name VARCHAR(20) NOT NULL,
+    extension VARCHAR(255) NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ
 );
 
 
@@ -20,16 +20,16 @@ ALTER TABLE common.type_archive OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY common.type_archive
-    ADD CONSTRAINT type_archive_pkey PRIMARY KEY (id);
+ALTER TABLE common.type_archive
+    ADD CONSTRAINT pk_type_archive PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.type_archive
-    ADD CONSTRAINT odiseo_type_archive_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE common.type_archive
+    ADD CONSTRAINT fk_type_archive_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --

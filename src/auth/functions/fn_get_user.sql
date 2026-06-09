@@ -1,8 +1,8 @@
--- Function: auth.fn_find_user(character varying)
+-- Function: auth.fn_get_user(character varying)
 
 --
 
-CREATE FUNCTION auth.fn_find_user(p_uuid character varying) RETURNS TABLE(id bigint, uuid uuid, user_name character varying, email odiseo.email_citext, typ_document_id bigint, document character varying, employee_email odiseo.email_citext, employee_uuid uuid, employee text, first_name character varying, first_surname character varying, second_surname character varying, role_id bigint, company_id integer)
+CREATE FUNCTION auth.fn_get_user(p_uuid character varying) RETURNS TABLE(id bigint, uuid uuid, user_name character varying, email odiseo.email_citext, typ_document_id bigint, document character varying, employee_email odiseo.email_citext, employee_uuid uuid, employee text, first_name character varying, first_surname character varying, second_surname character varying, role_id bigint, company_id integer)
     LANGUAGE plpgsql
     AS $$
             BEGIN
@@ -30,6 +30,6 @@ CREATE FUNCTION auth.fn_find_user(p_uuid character varying) RETURNS TABLE(id big
             $$;
 
 
-ALTER FUNCTION auth.fn_find_user(p_uuid character varying) OWNER TO postgres;
+ALTER FUNCTION auth.fn_get_user(p_uuid character varying) OWNER TO postgres;
 
 --

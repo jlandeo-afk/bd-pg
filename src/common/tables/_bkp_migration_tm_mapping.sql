@@ -5,9 +5,9 @@
 
 CREATE TABLE common._bkp_migration_tm_mapping (
     old_tm_id smallint,
-    new_tm_id integer,
-    cycle_id bigint,
-    rn bigint
+    new_tm_id INTEGER,
+    cycle_id BIGINT,
+    rn BIGINT
 );
 
 

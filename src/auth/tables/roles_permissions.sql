@@ -4,15 +4,15 @@
 --
 
 CREATE TABLE auth.roles_permissions (
-    id bigint NOT NULL,
-    rol_id bigint NOT NULL,
-    permission_id bigint NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    company_id integer DEFAULT 1 NOT NULL
+    id BIGINT NOT NULL,
+    rol_id BIGINT NOT NULL,
+    permission_id BIGINT NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    company_id INTEGER DEFAULT 1 NOT NULL
 );
 
 
@@ -22,48 +22,48 @@ ALTER TABLE auth.roles_permissions OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY auth.roles_permissions
-    ADD CONSTRAINT roles_permissions_pkey PRIMARY KEY (id);
+ALTER TABLE auth.roles_permissions
+    ADD CONSTRAINT pk_roles_permissions PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.roles_permissions
-    ADD CONSTRAINT odiseo_roles_permissions_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE auth.roles_permissions
+    ADD CONSTRAINT fk_roles_permissions_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.roles_permissions
-    ADD CONSTRAINT odiseo_roles_permissions_permission_id_foreign FOREIGN KEY (permission_id) REFERENCES auth.permissions(id);
+ALTER TABLE auth.roles_permissions
+    ADD CONSTRAINT fk_roles_permissions_permission FOREIGN KEY (permission_id) REFERENCES auth.permissions(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.roles_permissions
-    ADD CONSTRAINT odiseo_roles_permissions_rol_id_foreign FOREIGN KEY (rol_id) REFERENCES auth.roles(id);
+ALTER TABLE auth.roles_permissions
+    ADD CONSTRAINT fk_roles_permissions_rol FOREIGN KEY (rol_id) REFERENCES auth.roles(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.roles_permissions
-    ADD CONSTRAINT odiseo_roles_permissions_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE auth.roles_permissions
+    ADD CONSTRAINT fk_roles_permissions_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.roles_permissions
-    ADD CONSTRAINT roles_permissions_company_id_foreign FOREIGN KEY (company_id) REFERENCES odiseo.companies(id);
+ALTER TABLE auth.roles_permissions
+    ADD CONSTRAINT fk_roles_permissions_company FOREIGN KEY (company_id) REFERENCES odiseo.companies(id);
 
 
 --

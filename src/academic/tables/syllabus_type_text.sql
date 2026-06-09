@@ -4,18 +4,18 @@
 --
 
 CREATE TABLE academic.syllabus_type_text (
-    id bigint NOT NULL,
-    type_text_id bigint NOT NULL,
-    syllabus_id bigint NOT NULL,
-    week integer NOT NULL,
-    quantity integer NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    deleted_by bigint,
-    updated_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    type_text_id BIGINT NOT NULL,
+    syllabus_id BIGINT NOT NULL,
+    week INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    deleted_by BIGINT,
+    updated_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -25,48 +25,48 @@ ALTER TABLE academic.syllabus_type_text OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY academic.syllabus_type_text
-    ADD CONSTRAINT syllabus_type_text_pkey PRIMARY KEY (id);
+ALTER TABLE academic.syllabus_type_text
+    ADD CONSTRAINT pk_syllabus_type_text PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.syllabus_type_text
-    ADD CONSTRAINT odiseo_syllabus_type_text_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE academic.syllabus_type_text
+    ADD CONSTRAINT fk_syllabus_type_text_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.syllabus_type_text
-    ADD CONSTRAINT odiseo_syllabus_type_text_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE academic.syllabus_type_text
+    ADD CONSTRAINT fk_syllabus_type_text_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.syllabus_type_text
-    ADD CONSTRAINT odiseo_syllabus_type_text_syllabus_id_foreign FOREIGN KEY (syllabus_id) REFERENCES academic.syllabus(id);
+ALTER TABLE academic.syllabus_type_text
+    ADD CONSTRAINT fk_syllabus_type_text_syllabus FOREIGN KEY (syllabus_id) REFERENCES academic.syllabus(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.syllabus_type_text
-    ADD CONSTRAINT odiseo_syllabus_type_text_type_text_id_foreign FOREIGN KEY (type_text_id) REFERENCES common.type_text(id);
+ALTER TABLE academic.syllabus_type_text
+    ADD CONSTRAINT fk_syllabus_type_text_type_text FOREIGN KEY (type_text_id) REFERENCES common.type_text(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.syllabus_type_text
-    ADD CONSTRAINT odiseo_syllabus_type_text_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE academic.syllabus_type_text
+    ADD CONSTRAINT fk_syllabus_type_text_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

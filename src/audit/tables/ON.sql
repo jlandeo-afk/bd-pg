@@ -3,7 +3,7 @@
 
 --
 
-CREATE INDEX idx_audit_transaction ON audit.audit_log USING btree (transaction_id);
+CREATE INDEX idx_ON_transaction_id ON audit.audit_log USING btree (transaction_id);
 
 
 --

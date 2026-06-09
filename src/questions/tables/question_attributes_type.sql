@@ -4,14 +4,14 @@
 --
 
 CREATE TABLE questions.question_attributes_type (
-    id bigint NOT NULL,
-    name character varying(255) NOT NULL,
-    created_by integer NOT NULL,
-    updated_by integer,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    deleted_by integer
+    id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    created_by INTEGER NOT NULL,
+    updated_by INTEGER,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    deleted_by INTEGER
 );
 
 
@@ -21,8 +21,8 @@ ALTER TABLE questions.question_attributes_type OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.question_attributes_type
-    ADD CONSTRAINT question_attributes_type_pkey PRIMARY KEY (id);
+ALTER TABLE questions.question_attributes_type
+    ADD CONSTRAINT pk_question_attributes_type PRIMARY KEY (id);
 
 
 --

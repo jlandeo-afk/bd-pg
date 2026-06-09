@@ -4,16 +4,16 @@
 --
 
 CREATE TABLE materials.type_material_area_courses (
-    id bigint NOT NULL,
-    type_material_course_id bigint NOT NULL,
-    type_material_area_id bigint NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint NOT NULL,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    type_material_course_id BIGINT NOT NULL,
+    type_material_area_id BIGINT NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT NOT NULL,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -23,48 +23,48 @@ ALTER TABLE materials.type_material_area_courses OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY materials.type_material_area_courses
-    ADD CONSTRAINT type_material_area_courses_pkey PRIMARY KEY (id);
+ALTER TABLE materials.type_material_area_courses
+    ADD CONSTRAINT pk_type_material_area_courses PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area_courses
-    ADD CONSTRAINT odiseo_type_material_area_courses_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_area_courses
+    ADD CONSTRAINT fk_type_material_area_courses_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area_courses
-    ADD CONSTRAINT odiseo_type_material_area_courses_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_area_courses
+    ADD CONSTRAINT fk_type_material_area_courses_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area_courses
-    ADD CONSTRAINT odiseo_type_material_area_courses_type_material_area_id_foreign FOREIGN KEY (type_material_area_id) REFERENCES materials.type_material_area(id);
+ALTER TABLE materials.type_material_area_courses
+    ADD CONSTRAINT fk_type_material_area_courses_type_material_area FOREIGN KEY (type_material_area_id) REFERENCES materials.type_material_area(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area_courses
-    ADD CONSTRAINT odiseo_type_material_area_courses_type_material_course_id_forei FOREIGN KEY (type_material_course_id) REFERENCES materials.type_material_course(id);
+ALTER TABLE materials.type_material_area_courses
+    ADD CONSTRAINT fk_type_material_area_courses_type_material_course FOREIGN KEY (type_material_course_id) REFERENCES materials.type_material_course(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area_courses
-    ADD CONSTRAINT odiseo_type_material_area_courses_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_area_courses
+    ADD CONSTRAINT fk_type_material_area_courses_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

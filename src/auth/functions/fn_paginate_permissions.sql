@@ -1,8 +1,8 @@
--- Function: auth.fn_permissions(integer, integer, integer, boolean, boolean, character varying, integer, boolean)
+-- Function: auth.fn_paginate_permissions(integer, integer, integer, boolean, boolean, character varying, integer, boolean)
 
 --
 
-CREATE FUNCTION auth.fn_permissions(p_perpage integer, p_npage integer, f_permission_id integer, p_administrator boolean, f_status boolean, p_name_text character varying, p_company_id integer, p_can_filter_companies boolean) RETURNS TABLE(id bigint, name character varying, fl_status boolean, created_by bigint, updated_by bigint, deleted_by bigint, created_at timestamp without time zone, updated_at timestamp without time zone, deleted_at timestamp without time zone, module character varying, fl_administrator boolean, roles json, user_name character varying, user_email odiseo.email_citext, total integer)
+CREATE FUNCTION auth.fn_paginate_permissions(p_perpage integer, p_npage integer, f_permission_id integer, p_administrator boolean, f_status boolean, p_name_text character varying, p_company_id integer, p_can_filter_companies boolean) RETURNS TABLE(id bigint, name character varying, fl_status boolean, created_by bigint, updated_by bigint, deleted_by bigint, created_at timestamp without time zone, updated_at timestamp without time zone, deleted_at timestamp without time zone, module character varying, fl_administrator boolean, roles json, user_name character varying, user_email odiseo.email_citext, total integer)
     LANGUAGE plpgsql
     AS $$
                         DECLARE
@@ -77,6 +77,6 @@ CREATE FUNCTION auth.fn_permissions(p_perpage integer, p_npage integer, f_permis
                         $$;
 
 
-ALTER FUNCTION auth.fn_permissions(p_perpage integer, p_npage integer, f_permission_id integer, p_administrator boolean, f_status boolean, p_name_text character varying, p_company_id integer, p_can_filter_companies boolean) OWNER TO postgres;
+ALTER FUNCTION auth.fn_paginate_permissions(p_perpage integer, p_npage integer, f_permission_id integer, p_administrator boolean, f_status boolean, p_name_text character varying, p_company_id integer, p_can_filter_companies boolean) OWNER TO postgres;
 
 --

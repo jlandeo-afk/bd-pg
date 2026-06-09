@@ -4,13 +4,13 @@
 --
 
 CREATE TABLE common.type_templates (
-    id bigint NOT NULL,
-    name character varying(255) NOT NULL,
-    "default" boolean DEFAULT false NOT NULL,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    company_id integer
+    id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    "DEFAULT" BOOLEAN DEFAULT false NOT NULL,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    company_id INTEGER
 );
 
 
@@ -20,7 +20,7 @@ ALTER TABLE common.type_templates OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY common.type_templates
+ALTER TABLE common.type_templates
     ADD CONSTRAINT odiseo_type_templates_name_unique UNIQUE (name);
 
 
@@ -28,16 +28,16 @@ ALTER TABLE ONLY common.type_templates
 
 --
 
-ALTER TABLE ONLY common.type_templates
-    ADD CONSTRAINT type_templates_pkey PRIMARY KEY (id);
+ALTER TABLE common.type_templates
+    ADD CONSTRAINT pk_type_templates PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.type_templates
-    ADD CONSTRAINT type_templates_company_id_foreign FOREIGN KEY (company_id) REFERENCES organization.companies(id);
+ALTER TABLE common.type_templates
+    ADD CONSTRAINT fk_type_templates_company FOREIGN KEY (company_id) REFERENCES organization.companies(id);
 
 
 --

@@ -4,16 +4,16 @@
 --
 
 CREATE TABLE auth.nq_user_request (
-    id bigint NOT NULL,
-    user_id bigint NOT NULL,
-    request_status character varying(255) DEFAULT 'to_be_requested'::character varying NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    CONSTRAINT nq_user_request_request_status_check CHECK (((request_status)::text = ANY (ARRAY[('to_be_requested'::character varying)::text, ('failed'::character varying)::text, ('requested'::character varying)::text, ('delivered'::character varying)::text])))
+    id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    request_status VARCHAR(255) DEFAULT 'to_be_requested'::VARCHAR NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    CONSTRAINT nq_user_request_request_status_check CHECK (((request_status)::TEXT = ANY (ARRAY[('to_be_requested'::VARCHAR)::TEXT, ('failed'::VARCHAR)::TEXT, ('requested'::VARCHAR)::TEXT, ('delivered'::VARCHAR)::TEXT])))
 );
 
 
@@ -23,7 +23,7 @@ ALTER TABLE auth.nq_user_request OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY auth.nq_user_request
+ALTER TABLE auth.nq_user_request
     ADD CONSTRAINT nq_req_user_id UNIQUE (user_id);
 
 
@@ -31,7 +31,7 @@ ALTER TABLE ONLY auth.nq_user_request
 
 --
 
-ALTER TABLE ONLY auth.nq_user_request
+ALTER TABLE auth.nq_user_request
     ADD CONSTRAINT nq_user_id UNIQUE (user_id);
 
 
@@ -39,32 +39,32 @@ ALTER TABLE ONLY auth.nq_user_request
 
 --
 
-ALTER TABLE ONLY auth.nq_user_request
-    ADD CONSTRAINT nq_user_request_pkey PRIMARY KEY (id);
+ALTER TABLE auth.nq_user_request
+    ADD CONSTRAINT pk_nq_user_request PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.nq_user_request
-    ADD CONSTRAINT nq_user_request_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE auth.nq_user_request
+    ADD CONSTRAINT fk_nq_user_request_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.nq_user_request
-    ADD CONSTRAINT nq_user_request_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE auth.nq_user_request
+    ADD CONSTRAINT fk_nq_user_request_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.nq_user_request
-    ADD CONSTRAINT nq_user_request_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE auth.nq_user_request
+    ADD CONSTRAINT fk_nq_user_request_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

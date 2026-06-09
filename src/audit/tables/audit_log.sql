@@ -4,16 +4,16 @@
 --
 
 CREATE TABLE audit.audit_log (
-    id bigint NOT NULL,
-    transaction_id uuid,
-    table_name character varying(70) NOT NULL,
-    record_id character varying NOT NULL,
-    action character varying(6) NOT NULL,
-    old_data jsonb,
-    new_data jsonb,
-    changed_by bigint,
-    changed_at timestamp with time zone DEFAULT now(),
-    company_id integer
+    id BIGINT NOT NULL,
+    transaction_id UUID,
+    table_name VARCHAR(70) NOT NULL,
+    record_id VARCHAR NOT NULL,
+    action VARCHAR(6) NOT NULL,
+    old_data JSONB,
+    new_data JSONB,
+    changed_by BIGINT,
+    changed_at TIMESTAMPTZ DEFAULT now(),
+    company_id INTEGER
 );
 
 
@@ -23,29 +23,29 @@ ALTER TABLE audit.audit_log OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY audit.audit_log
-    ADD CONSTRAINT audit_log_pkey PRIMARY KEY (id);
+ALTER TABLE audit.audit_log
+    ADD CONSTRAINT pk_audit_log PRIMARY KEY (id);
 
 
 --
 
 --
 
-CREATE INDEX idx_audit_changed_at ON audit.audit_log USING btree (changed_at);
+CREATE INDEX idx_audit_log_changed_at ON audit.audit_log USING btree (changed_at);
 
 
 --
 
 --
 
-CREATE INDEX idx_audit_changed_by ON audit.audit_log USING btree (changed_by);
+CREATE INDEX idx_audit_log_changed_by ON audit.audit_log USING btree (changed_by);
 
 
 --
 
 --
 
-CREATE INDEX idx_audit_table_record ON audit.audit_log USING btree (table_name, record_id);
+CREATE INDEX idx_audit_log_table_name_record_id ON audit.audit_log USING btree (table_name, record_id);
 
 
 --

@@ -1,8 +1,8 @@
--- Function: auth.fn_get_auth_user(bigint)
+-- Function: auth.fn_get_auth_user_details_details(bigint)
 
 --
 
-CREATE FUNCTION auth.fn_get_auth_user(p_user_id bigint) RETURNS TABLE(id bigint, uuid uuid, "user" character varying, email character varying, company_id integer, fl_suspended boolean, employee_id bigint, first_name character varying, first_surname character varying, second_surname character varying, document character varying, email_employee character varying, code character varying, charge_id bigint, rol_id bigint, rol character varying, courses jsonb, permissions text)
+CREATE FUNCTION auth.fn_get_auth_user_details_details(p_user_id bigint) RETURNS TABLE(id bigint, uuid uuid, "user" character varying, email character varying, company_id integer, fl_suspended boolean, employee_id bigint, first_name character varying, first_surname character varying, second_surname character varying, document character varying, email_employee character varying, code character varying, charge_id bigint, rol_id bigint, rol character varying, courses jsonb, permissions text)
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -121,6 +121,6 @@ BEGIN
 $$;
 
 
-ALTER FUNCTION auth.fn_get_auth_user(p_user_id bigint) OWNER TO postgres;
+ALTER FUNCTION auth.fn_get_auth_user_details_details(p_user_id bigint) OWNER TO postgres;
 
 --

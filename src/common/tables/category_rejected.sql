@@ -5,14 +5,14 @@
 
 CREATE TABLE common.category_rejected (
     id smallint NOT NULL,
-    name character varying(100) NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    name VARCHAR(100) NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -22,32 +22,32 @@ ALTER TABLE common.category_rejected OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY common.category_rejected
-    ADD CONSTRAINT category_rejected_pkey PRIMARY KEY (id);
+ALTER TABLE common.category_rejected
+    ADD CONSTRAINT pk_category_rejected PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.category_rejected
-    ADD CONSTRAINT odiseo_category_rejected_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE common.category_rejected
+    ADD CONSTRAINT fk_category_rejected_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.category_rejected
-    ADD CONSTRAINT odiseo_category_rejected_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE common.category_rejected
+    ADD CONSTRAINT fk_category_rejected_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.category_rejected
-    ADD CONSTRAINT odiseo_category_rejected_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE common.category_rejected
+    ADD CONSTRAINT fk_category_rejected_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

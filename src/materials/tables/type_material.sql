@@ -5,27 +5,27 @@
 
 CREATE TABLE materials.type_material (
     id smallint NOT NULL,
-    description character varying(255) NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    code character varying(4),
-    amount_question integer DEFAULT 0 NOT NULL,
-    fl_exam boolean DEFAULT false NOT NULL,
-    type_material_template_id bigint,
-    fl_class_material boolean DEFAULT false NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    code VARCHAR(4),
+    amount_question INTEGER DEFAULT 0 NOT NULL,
+    fl_exam BOOLEAN DEFAULT false NOT NULL,
+    type_material_template_id BIGINT,
+    fl_class_material BOOLEAN DEFAULT false NOT NULL,
     thread smallint DEFAULT '1'::smallint NOT NULL,
-    percentage numeric(5,2) DEFAULT '30'::numeric NOT NULL,
-    parent_id bigint,
-    level_order boolean DEFAULT false NOT NULL,
-    company_id bigint DEFAULT '1'::bigint NOT NULL,
+    percentage NUMERIC(5,2) DEFAULT '30'::NUMERIC NOT NULL,
+    parent_id BIGINT,
+    level_order BOOLEAN DEFAULT false NOT NULL,
+    company_id BIGINT DEFAULT '1'::BIGINT NOT NULL,
     "position" smallint DEFAULT '0'::smallint NOT NULL,
-    order_date timestamp(0) without time zone,
-    cycle_id bigint
+    order_date TIMESTAMPTZ,
+    cycle_id BIGINT
 );
 
 
@@ -35,64 +35,64 @@ ALTER TABLE materials.type_material OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY materials.type_material
-    ADD CONSTRAINT type_material_pkey PRIMARY KEY (id);
+ALTER TABLE materials.type_material
+    ADD CONSTRAINT pk_type_material PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material
-    ADD CONSTRAINT odiseo_type_material_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material
+    ADD CONSTRAINT fk_type_material_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material
-    ADD CONSTRAINT odiseo_type_material_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material
+    ADD CONSTRAINT fk_type_material_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material
-    ADD CONSTRAINT odiseo_type_material_parent_id_foreign FOREIGN KEY (parent_id) REFERENCES materials.type_material(id);
+ALTER TABLE materials.type_material
+    ADD CONSTRAINT fk_type_material_parent FOREIGN KEY (parent_id) REFERENCES materials.type_material(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material
-    ADD CONSTRAINT odiseo_type_material_type_material_template_id_foreign FOREIGN KEY (type_material_template_id) REFERENCES materials.type_material_template(id);
+ALTER TABLE materials.type_material
+    ADD CONSTRAINT fk_type_material_type_material_template FOREIGN KEY (type_material_template_id) REFERENCES materials.type_material_template(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material
-    ADD CONSTRAINT odiseo_type_material_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material
+    ADD CONSTRAINT fk_type_material_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material
-    ADD CONSTRAINT type_material_company_id_foreign FOREIGN KEY (company_id) REFERENCES odiseo.companies(id);
+ALTER TABLE materials.type_material
+    ADD CONSTRAINT fk_type_material_company FOREIGN KEY (company_id) REFERENCES odiseo.companies(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material
-    ADD CONSTRAINT type_material_cycle_id_foreign FOREIGN KEY (cycle_id) REFERENCES academic.cycle(id);
+ALTER TABLE materials.type_material
+    ADD CONSTRAINT fk_type_material_cycle FOREIGN KEY (cycle_id) REFERENCES academic.cycle(id);
 
 
 --

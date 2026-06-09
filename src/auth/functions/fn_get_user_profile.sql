@@ -1,8 +1,8 @@
--- Function: auth.fn_show_user_uuid(uuid, bigint)
+-- Function: auth.fn_get_user_profile(uuid, bigint)
 
 --
 
-CREATE FUNCTION auth.fn_show_user_uuid(p_uuid uuid, p_company_id bigint) RETURNS TABLE(uuid uuid, user_name character varying, email character varying, rol_id bigint, employee_uuid uuid, first_name character varying, first_surname character varying, second_surname character varying, personal_email character varying, phone character varying, charge_id bigint, type_document_id bigint, document character varying, company_id integer, data_universities jsonb, courses jsonb, data_teacher json)
+CREATE FUNCTION auth.fn_get_user_profile(p_uuid uuid, p_company_id bigint) RETURNS TABLE(uuid uuid, user_name character varying, email character varying, rol_id bigint, employee_uuid uuid, first_name character varying, first_surname character varying, second_surname character varying, personal_email character varying, phone character varying, charge_id bigint, type_document_id bigint, document character varying, company_id integer, data_universities jsonb, courses jsonb, data_teacher json)
     LANGUAGE plpgsql
     AS $$
                     BEGIN
@@ -91,6 +91,6 @@ CREATE FUNCTION auth.fn_show_user_uuid(p_uuid uuid, p_company_id bigint) RETURNS
                     $$;
 
 
-ALTER FUNCTION auth.fn_show_user_uuid(p_uuid uuid, p_company_id bigint) OWNER TO postgres;
+ALTER FUNCTION auth.fn_get_user_profile(p_uuid uuid, p_company_id bigint) OWNER TO postgres;
 
 --

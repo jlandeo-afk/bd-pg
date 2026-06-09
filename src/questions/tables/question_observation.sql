@@ -4,19 +4,19 @@
 --
 
 CREATE TABLE questions.question_observation (
-    id bigint NOT NULL,
-    description text NOT NULL,
-    similitaries text DEFAULT '[]'::text NOT NULL,
-    question_id bigint NOT NULL,
-    type character varying(5) NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    boards_observation text DEFAULT '[]'::text NOT NULL
+    id BIGINT NOT NULL,
+    description TEXT NOT NULL,
+    similitaries TEXT DEFAULT '[]'::TEXT NOT NULL,
+    question_id BIGINT NOT NULL,
+    type VARCHAR(5) NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    boards_observation TEXT DEFAULT '[]'::TEXT NOT NULL
 );
 
 
@@ -26,40 +26,40 @@ ALTER TABLE questions.question_observation OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.question_observation
-    ADD CONSTRAINT question_observation_pkey PRIMARY KEY (id);
+ALTER TABLE questions.question_observation
+    ADD CONSTRAINT pk_question_observation PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.question_observation
-    ADD CONSTRAINT odiseo_question_observation_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE questions.question_observation
+    ADD CONSTRAINT fk_question_observation_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.question_observation
-    ADD CONSTRAINT odiseo_question_observation_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE questions.question_observation
+    ADD CONSTRAINT fk_question_observation_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.question_observation
-    ADD CONSTRAINT odiseo_question_observation_question_id_foreign FOREIGN KEY (question_id) REFERENCES questions.question(id);
+ALTER TABLE questions.question_observation
+    ADD CONSTRAINT fk_question_observation_question FOREIGN KEY (question_id) REFERENCES questions.question(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.question_observation
-    ADD CONSTRAINT odiseo_question_observation_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE questions.question_observation
+    ADD CONSTRAINT fk_question_observation_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

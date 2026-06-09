@@ -4,18 +4,18 @@
 --
 
 CREATE TABLE materials.type_material_detail_course_texts (
-    id bigint NOT NULL,
-    type_material_detail_template_id bigint NOT NULL,
-    type_material_course_id bigint NOT NULL,
-    course_id bigint NOT NULL,
-    amount_text integer NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint NOT NULL,
-    updated_by bigint,
-    deleted_by bigint,
-    deleted_at timestamp(0) without time zone,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    type_material_detail_template_id BIGINT NOT NULL,
+    type_material_course_id BIGINT NOT NULL,
+    course_id BIGINT NOT NULL,
+    amount_text INTEGER NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT NOT NULL,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    deleted_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ
 );
 
 
@@ -25,56 +25,56 @@ ALTER TABLE materials.type_material_detail_course_texts OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY materials.type_material_detail_course_texts
-    ADD CONSTRAINT type_material_detail_course_texts_pkey PRIMARY KEY (id);
+ALTER TABLE materials.type_material_detail_course_texts
+    ADD CONSTRAINT pk_type_material_detail_course_texts PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_detail_course_texts
-    ADD CONSTRAINT type_material_detail_course_texts_course_id_foreign FOREIGN KEY (course_id) REFERENCES academic.course(id);
+ALTER TABLE materials.type_material_detail_course_texts
+    ADD CONSTRAINT fk_type_material_detail_course_texts_course FOREIGN KEY (course_id) REFERENCES academic.course(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_detail_course_texts
-    ADD CONSTRAINT type_material_detail_course_texts_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_detail_course_texts
+    ADD CONSTRAINT fk_type_material_detail_course_texts_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_detail_course_texts
-    ADD CONSTRAINT type_material_detail_course_texts_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_detail_course_texts
+    ADD CONSTRAINT fk_type_material_detail_course_texts_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_detail_course_texts
-    ADD CONSTRAINT type_material_detail_course_texts_type_material_course_id_forei FOREIGN KEY (type_material_course_id) REFERENCES materials.type_material_course(id);
+ALTER TABLE materials.type_material_detail_course_texts
+    ADD CONSTRAINT fk_type_material_detail_course_texts_type_material_course FOREIGN KEY (type_material_course_id) REFERENCES materials.type_material_course(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_detail_course_texts
-    ADD CONSTRAINT type_material_detail_course_texts_type_material_detail_template FOREIGN KEY (type_material_detail_template_id) REFERENCES materials.type_material_detail_template(id);
+ALTER TABLE materials.type_material_detail_course_texts
+    ADD CONSTRAINT fk_type_material_detail_course_texts_type_material_detail_template FOREIGN KEY (type_material_detail_template_id) REFERENCES materials.type_material_detail_template(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_detail_course_texts
-    ADD CONSTRAINT type_material_detail_course_texts_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_detail_course_texts
+    ADD CONSTRAINT fk_type_material_detail_course_texts_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

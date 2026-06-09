@@ -4,20 +4,20 @@
 --
 
 CREATE TABLE academic.detail_level_syllabus_weeks (
-    id bigint NOT NULL,
-    level_syllabus_weeks_id bigint NOT NULL,
-    type_material_id bigint NOT NULL,
-    level_id bigint NOT NULL,
-    type_question character varying(255) NOT NULL,
-    number_questions integer NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    company_id bigint DEFAULT '1'::bigint NOT NULL
+    id BIGINT NOT NULL,
+    level_syllabus_weeks_id BIGINT NOT NULL,
+    type_material_id BIGINT NOT NULL,
+    level_id BIGINT NOT NULL,
+    type_question VARCHAR(255) NOT NULL,
+    number_questions INTEGER NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    company_id BIGINT DEFAULT '1'::BIGINT NOT NULL
 );
 
 
@@ -27,71 +27,71 @@ ALTER TABLE academic.detail_level_syllabus_weeks OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY academic.detail_level_syllabus_weeks
-    ADD CONSTRAINT detail_level_syllabus_weeks_pkey PRIMARY KEY (id);
+ALTER TABLE academic.detail_level_syllabus_weeks
+    ADD CONSTRAINT pk_detail_level_syllabus_weeks PRIMARY KEY (id);
 
 
 --
 
 --
 
-CREATE INDEX idx_dtl_lvl_syl_wks_id ON academic.detail_level_syllabus_weeks USING btree (level_syllabus_weeks_id);
+CREATE INDEX idx_detail_level_syllabus_weeks_level_syllabus_weeks_id ON academic.detail_level_syllabus_weeks USING btree (level_syllabus_weeks_id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.detail_level_syllabus_weeks
-    ADD CONSTRAINT detail_level_syllabus_weeks_company_id_foreign FOREIGN KEY (company_id) REFERENCES organization.companies(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE academic.detail_level_syllabus_weeks
+    ADD CONSTRAINT fk_detail_level_syllabus_weeks_company FOREIGN KEY (company_id) REFERENCES organization.companies(id) ON DELETE RESTRICT;
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.detail_level_syllabus_weeks
-    ADD CONSTRAINT odiseo_detail_level_syllabus_weeks_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE academic.detail_level_syllabus_weeks
+    ADD CONSTRAINT fk_detail_level_syllabus_weeks_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.detail_level_syllabus_weeks
-    ADD CONSTRAINT odiseo_detail_level_syllabus_weeks_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE academic.detail_level_syllabus_weeks
+    ADD CONSTRAINT fk_detail_level_syllabus_weeks_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.detail_level_syllabus_weeks
-    ADD CONSTRAINT odiseo_detail_level_syllabus_weeks_level_id_foreign FOREIGN KEY (level_id) REFERENCES academic.level(id);
+ALTER TABLE academic.detail_level_syllabus_weeks
+    ADD CONSTRAINT fk_detail_level_syllabus_weeks_level FOREIGN KEY (level_id) REFERENCES academic.level(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.detail_level_syllabus_weeks
-    ADD CONSTRAINT odiseo_detail_level_syllabus_weeks_level_syllabus_weeks_id_fore FOREIGN KEY (level_syllabus_weeks_id) REFERENCES academic.level_syllabus_weeks(id);
+ALTER TABLE academic.detail_level_syllabus_weeks
+    ADD CONSTRAINT fk_detail_level_syllabus_weeks_level_syllabus_weeks FOREIGN KEY (level_syllabus_weeks_id) REFERENCES academic.level_syllabus_weeks(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.detail_level_syllabus_weeks
-    ADD CONSTRAINT odiseo_detail_level_syllabus_weeks_type_material_id_foreign FOREIGN KEY (type_material_id) REFERENCES materials.type_material(id);
+ALTER TABLE academic.detail_level_syllabus_weeks
+    ADD CONSTRAINT fk_detail_level_syllabus_weeks_type_material FOREIGN KEY (type_material_id) REFERENCES materials.type_material(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.detail_level_syllabus_weeks
-    ADD CONSTRAINT odiseo_detail_level_syllabus_weeks_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE academic.detail_level_syllabus_weeks
+    ADD CONSTRAINT fk_detail_level_syllabus_weeks_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

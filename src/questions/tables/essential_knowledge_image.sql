@@ -4,16 +4,16 @@
 --
 
 CREATE TABLE questions.essential_knowledge_image (
-    id bigint NOT NULL,
-    essential_knowledge_id bigint NOT NULL,
-    image text NOT NULL,
-    extension text NOT NULL,
-    created_by bigint NOT NULL,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    essential_knowledge_id BIGINT NOT NULL,
+    image TEXT NOT NULL,
+    extension TEXT NOT NULL,
+    created_by BIGINT NOT NULL,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -23,16 +23,16 @@ ALTER TABLE questions.essential_knowledge_image OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.essential_knowledge_image
-    ADD CONSTRAINT essential_knowledge_image_pkey PRIMARY KEY (id);
+ALTER TABLE questions.essential_knowledge_image
+    ADD CONSTRAINT pk_essential_knowledge_image PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.essential_knowledge_image
-    ADD CONSTRAINT essential_knowledge_image_essential_knowledge_id_foreign FOREIGN KEY (essential_knowledge_id) REFERENCES questions.essential_knowledges(id);
+ALTER TABLE questions.essential_knowledge_image
+    ADD CONSTRAINT fk_essential_knowledge_image_essential_knowledge FOREIGN KEY (essential_knowledge_id) REFERENCES questions.essential_knowledges(id);
 
 
 --

@@ -4,13 +4,13 @@
 --
 
 CREATE TABLE audit.function_log (
-    id bigint NOT NULL,
-    datetime timestamp without time zone DEFAULT now(),
-    schema_name text,
-    function_name text,
-    tag text,
-    function_body text,
-    changed_by text DEFAULT CURRENT_USER
+    id BIGINT NOT NULL,
+    datetime TIMESTAMPTZ DEFAULT now(),
+    schema_name TEXT,
+    function_name TEXT,
+    tag TEXT,
+    function_body TEXT,
+    changed_by TEXT DEFAULT CURRENT_USER
 );
 
 
@@ -20,8 +20,8 @@ ALTER TABLE audit.function_log OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY audit.function_log
-    ADD CONSTRAINT function_log_pkey PRIMARY KEY (id);
+ALTER TABLE audit.function_log
+    ADD CONSTRAINT pk_function_log PRIMARY KEY (id);
 
 
 --
@@ -35,7 +35,7 @@ CREATE INDEX idx_function_log_datetime ON audit.function_log USING btree (dateti
 
 --
 
-CREATE INDEX idx_function_log_name ON audit.function_log USING btree (function_name);
+CREATE INDEX idx_function_log_function_name ON audit.function_log USING btree (function_name);
 
 
 --

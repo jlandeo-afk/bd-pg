@@ -4,21 +4,21 @@
 --
 
 CREATE TABLE questions.employee_didi_question_field (
-    id bigint NOT NULL,
-    employee_didi_question_id bigint NOT NULL,
-    setting_diagrammed_course_id bigint NOT NULL,
-    value text,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    migrated_updated_at timestamp(0) without time zone DEFAULT CURRENT_TIMESTAMP,
-    math_migration_status character varying(255) DEFAULT 'NOT_MIGRATED'::character varying NOT NULL,
-    is_migrated boolean DEFAULT false NOT NULL,
-    CONSTRAINT employee_didi_question_field_math_migration_status_new_check CHECK (((math_migration_status)::text = ANY (ARRAY[('NOT_MIGRATED'::character varying)::text, ('TO_BE_MIGRATED'::character varying)::text, ('MIGRATING'::character varying)::text, ('MIGRATED'::character varying)::text, ('NOT_MIGRATABLE'::character varying)::text, ('MIGRATION_FAILURE'::character varying)::text])))
+    id BIGINT NOT NULL,
+    employee_didi_question_id BIGINT NOT NULL,
+    setting_diagrammed_course_id BIGINT NOT NULL,
+    value TEXT,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    migrated_updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    math_migration_status VARCHAR(255) DEFAULT 'NOT_MIGRATED'::VARCHAR NOT NULL,
+    is_migrated BOOLEAN DEFAULT false NOT NULL,
+    CONSTRAINT employee_didi_question_field_math_migration_status_new_check CHECK (((math_migration_status)::TEXT = ANY (ARRAY[('NOT_MIGRATED'::VARCHAR)::TEXT, ('TO_BE_MIGRATED'::VARCHAR)::TEXT, ('MIGRATING'::VARCHAR)::TEXT, ('MIGRATED'::VARCHAR)::TEXT, ('NOT_MIGRATABLE'::VARCHAR)::TEXT, ('MIGRATION_FAILURE'::VARCHAR)::TEXT])))
 );
 
 
@@ -28,8 +28,8 @@ ALTER TABLE questions.employee_didi_question_field OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question_field
-    ADD CONSTRAINT employee_didi_question_field_pkey PRIMARY KEY (id);
+ALTER TABLE questions.employee_didi_question_field
+    ADD CONSTRAINT pk_employee_didi_question_field PRIMARY KEY (id);
 
 
 --
@@ -43,16 +43,16 @@ CREATE INDEX idx_employee_didi_question_field_employee_didi_question_id ON quest
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question_field
-    ADD CONSTRAINT odiseo_employee_didi_question_field_employee_didi_question_id_f FOREIGN KEY (employee_didi_question_id) REFERENCES questions.employee_didi_question(id);
+ALTER TABLE questions.employee_didi_question_field
+    ADD CONSTRAINT fk_employee_didi_question_field_employee_didi_question FOREIGN KEY (employee_didi_question_id) REFERENCES questions.employee_didi_question(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question_field
-    ADD CONSTRAINT odiseo_employee_didi_question_field_setting_diagrammed_course_i FOREIGN KEY (setting_diagrammed_course_id) REFERENCES academic.setting_diagrammed_courses(id);
+ALTER TABLE questions.employee_didi_question_field
+    ADD CONSTRAINT fk_employee_didi_question_field_setting_diagrammed_course FOREIGN KEY (setting_diagrammed_course_id) REFERENCES academic.setting_diagrammed_courses(id);
 
 
 --

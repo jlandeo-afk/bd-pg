@@ -4,18 +4,18 @@
 --
 
 CREATE TABLE questions.employee_didi_question_field_image_inactive (
-    id bigint NOT NULL,
-    employee_didi_question_id bigint NOT NULL,
-    code character varying NOT NULL,
-    image character varying NOT NULL,
-    extension character varying NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    employee_didi_question_id BIGINT NOT NULL,
+    code VARCHAR NOT NULL,
+    image VARCHAR NOT NULL,
+    extension VARCHAR NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -25,8 +25,8 @@ ALTER TABLE questions.employee_didi_question_field_image_inactive OWNER TO postg
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question_field_image_inactive
-    ADD CONSTRAINT employee_didi_question_field_image_inactive_pkey PRIMARY KEY (id, fl_status);
+ALTER TABLE questions.employee_didi_question_field_image_inactive
+    ADD CONSTRAINT pk_employee_didi_question_field_image_inactive PRIMARY KEY (id, fl_status);
 
 
 --

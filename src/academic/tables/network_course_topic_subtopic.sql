@@ -4,21 +4,21 @@
 --
 
 CREATE TABLE academic.network_course_topic_subtopic (
-    id bigint NOT NULL,
-    uuid uuid,
-    course_id integer,
-    topic_id integer,
-    subtopic_id integer,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    created_by integer,
-    updated_by integer,
-    deleted_by integer,
-    deleted_at timestamp(0) without time zone,
-    new_name_topic character varying(255) NOT NULL,
-    last_name_topic character varying(255) NOT NULL,
-    new_name_subtopic character varying(255) NOT NULL,
-    last_name_subtopic character varying(255) NOT NULL
+    id BIGINT NOT NULL,
+    UUID UUID,
+    course_id INTEGER,
+    topic_id INTEGER,
+    subtopic_id INTEGER,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    created_by INTEGER,
+    updated_by INTEGER,
+    deleted_by INTEGER,
+    deleted_at TIMESTAMPTZ,
+    new_name_topic VARCHAR(255) NOT NULL,
+    last_name_topic VARCHAR(255) NOT NULL,
+    new_name_subtopic VARCHAR(255) NOT NULL,
+    last_name_subtopic VARCHAR(255) NOT NULL
 );
 
 
@@ -28,39 +28,39 @@ ALTER TABLE academic.network_course_topic_subtopic OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY academic.network_course_topic_subtopic
-    ADD CONSTRAINT network_course_topic_subtopic_pkey PRIMARY KEY (id);
+ALTER TABLE academic.network_course_topic_subtopic
+    ADD CONSTRAINT pk_network_course_topic_subtopic PRIMARY KEY (id);
 
 
 --
 
 --
 
-CREATE UNIQUE INDEX idx_unique_uuid_course_topic_subtopic ON academic.network_course_topic_subtopic USING btree (uuid, course_id, topic_id, subtopic_id) WHERE (deleted_at IS NULL);
+CREATE UNIQUE INDEX uq_network_course_topic_subtopic_UUID_course_id_topic_id_sub ON academic.network_course_topic_subtopic USING btree (UUID, course_id, topic_id, subtopic_id) WHERE (deleted_at IS NULL);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.network_course_topic_subtopic
-    ADD CONSTRAINT network_course_topic_subtopic_course_id_foreign FOREIGN KEY (course_id) REFERENCES academic.course(id);
+ALTER TABLE academic.network_course_topic_subtopic
+    ADD CONSTRAINT fk_network_course_topic_subtopic_course FOREIGN KEY (course_id) REFERENCES academic.course(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.network_course_topic_subtopic
-    ADD CONSTRAINT network_course_topic_subtopic_subtopic_id_foreign FOREIGN KEY (subtopic_id) REFERENCES academic.subtopic(id);
+ALTER TABLE academic.network_course_topic_subtopic
+    ADD CONSTRAINT fk_network_course_topic_subtopic_subtopic FOREIGN KEY (subtopic_id) REFERENCES academic.subtopic(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.network_course_topic_subtopic
-    ADD CONSTRAINT network_course_topic_subtopic_topic_id_foreign FOREIGN KEY (topic_id) REFERENCES academic.topic(id);
+ALTER TABLE academic.network_course_topic_subtopic
+    ADD CONSTRAINT fk_network_course_topic_subtopic_topic FOREIGN KEY (topic_id) REFERENCES academic.topic(id);
 
 
 --

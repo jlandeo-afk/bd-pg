@@ -4,9 +4,9 @@
 --
 
 CREATE TABLE common.migrations (
-    id integer NOT NULL,
-    migration character varying(255) NOT NULL,
-    batch integer NOT NULL
+    id INTEGER NOT NULL,
+    migration VARCHAR(255) NOT NULL,
+    batch INTEGER NOT NULL
 );
 
 
@@ -16,8 +16,8 @@ ALTER TABLE common.migrations OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY common.migrations
-    ADD CONSTRAINT migrations_pkey PRIMARY KEY (id);
+ALTER TABLE common.migrations
+    ADD CONSTRAINT pk_migrations PRIMARY KEY (id);
 
 
 --

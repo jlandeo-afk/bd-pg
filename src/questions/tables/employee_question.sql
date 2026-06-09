@@ -4,28 +4,28 @@
 --
 
 CREATE TABLE questions.employee_question (
-    id bigint NOT NULL,
-    teacher_id bigint,
-    question_id bigint,
-    alternative_id bigint,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    type character varying(255) DEFAULT 'MANUAL'::character varying NOT NULL,
-    document_solution text,
-    week integer,
-    year integer,
-    solved boolean DEFAULT false NOT NULL,
-    url_pdf_question_solution character varying(255),
-    board_json text,
-    board_refuzed text,
-    fl_refuzed boolean DEFAULT false NOT NULL,
-    editor_content text,
-    url_pdf_question_solution_updated_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    teacher_id BIGINT,
+    question_id BIGINT,
+    alternative_id BIGINT,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    type VARCHAR(255) DEFAULT 'MANUAL'::VARCHAR NOT NULL,
+    document_solution TEXT,
+    week INTEGER,
+    year INTEGER,
+    solved BOOLEAN DEFAULT false NOT NULL,
+    url_pdf_question_solution VARCHAR(255),
+    board_json TEXT,
+    board_refuzed TEXT,
+    fl_refuzed BOOLEAN DEFAULT false NOT NULL,
+    editor_content TEXT,
+    url_pdf_question_solution_updated_at TIMESTAMPTZ
 );
 
 
@@ -35,63 +35,63 @@ ALTER TABLE questions.employee_question OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.employee_question
-    ADD CONSTRAINT employee_question_pkey PRIMARY KEY (id);
+ALTER TABLE questions.employee_question
+    ADD CONSTRAINT pk_employee_question PRIMARY KEY (id);
 
 
 --
 
 --
 
-CREATE INDEX idx_employee_question_active ON questions.employee_question USING btree (question_id) WHERE (fl_status = true);
+CREATE INDEX idx_employee_question_question_id ON questions.employee_question USING btree (question_id) WHERE (fl_status = true);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_question
-    ADD CONSTRAINT odiseo_employee_question_alternative_id_foreign FOREIGN KEY (alternative_id) REFERENCES questions.alternative(id);
+ALTER TABLE questions.employee_question
+    ADD CONSTRAINT fk_employee_question_alternative FOREIGN KEY (alternative_id) REFERENCES questions.alternative(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_question
-    ADD CONSTRAINT odiseo_employee_question_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE questions.employee_question
+    ADD CONSTRAINT fk_employee_question_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_question
-    ADD CONSTRAINT odiseo_employee_question_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE questions.employee_question
+    ADD CONSTRAINT fk_employee_question_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_question
-    ADD CONSTRAINT odiseo_employee_question_question_id_foreign FOREIGN KEY (question_id) REFERENCES questions.question(id);
+ALTER TABLE questions.employee_question
+    ADD CONSTRAINT fk_employee_question_question FOREIGN KEY (question_id) REFERENCES questions.question(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_question
-    ADD CONSTRAINT odiseo_employee_question_teacher_id_foreign FOREIGN KEY (teacher_id) REFERENCES odiseo.employees(id);
+ALTER TABLE questions.employee_question
+    ADD CONSTRAINT fk_employee_question_teacher FOREIGN KEY (teacher_id) REFERENCES odiseo.employees(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_question
-    ADD CONSTRAINT odiseo_employee_question_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE questions.employee_question
+    ADD CONSTRAINT fk_employee_question_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

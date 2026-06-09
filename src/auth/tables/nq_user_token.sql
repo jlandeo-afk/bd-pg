@@ -4,17 +4,17 @@
 --
 
 CREATE TABLE auth.nq_user_token (
-    id bigint NOT NULL,
-    user_id bigint NOT NULL,
-    nq_user character varying(255) NOT NULL,
-    nq_token character varying(255) NOT NULL,
-    nq_expiration_date timestamp(0) without time zone,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    nq_user VARCHAR(255) NOT NULL,
+    nq_token VARCHAR(255) NOT NULL,
+    nq_expiration_date TIMESTAMPTZ,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -24,40 +24,40 @@ ALTER TABLE auth.nq_user_token OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY auth.nq_user_token
-    ADD CONSTRAINT nq_user_token_pkey PRIMARY KEY (id);
+ALTER TABLE auth.nq_user_token
+    ADD CONSTRAINT pk_nq_user_token PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.nq_user_token
-    ADD CONSTRAINT nq_user_token_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE auth.nq_user_token
+    ADD CONSTRAINT fk_nq_user_token_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.nq_user_token
-    ADD CONSTRAINT nq_user_token_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE auth.nq_user_token
+    ADD CONSTRAINT fk_nq_user_token_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.nq_user_token
-    ADD CONSTRAINT nq_user_token_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE auth.nq_user_token
+    ADD CONSTRAINT fk_nq_user_token_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY auth.nq_user_token
-    ADD CONSTRAINT nq_user_token_user_id_foreign FOREIGN KEY (user_id) REFERENCES auth.users(id);
+ALTER TABLE auth.nq_user_token
+    ADD CONSTRAINT fk_nq_user_token_user FOREIGN KEY (user_id) REFERENCES auth.users(id);
 
 
 --

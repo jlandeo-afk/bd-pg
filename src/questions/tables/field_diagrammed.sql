@@ -4,16 +4,16 @@
 --
 
 CREATE TABLE questions.field_diagrammed (
-    id bigint NOT NULL,
-    name character varying(255) NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    name_nq character varying(255)
+    id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    name_nq VARCHAR(255)
 );
 
 
@@ -23,8 +23,8 @@ ALTER TABLE questions.field_diagrammed OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.field_diagrammed
-    ADD CONSTRAINT field_diagrammed_pkey PRIMARY KEY (id);
+ALTER TABLE questions.field_diagrammed
+    ADD CONSTRAINT pk_field_diagrammed PRIMARY KEY (id);
 
 
 --

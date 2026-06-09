@@ -4,16 +4,16 @@
 --
 
 CREATE TABLE questions.question_subtopic (
-    id bigint NOT NULL,
-    question_id integer NOT NULL,
-    subtopic_id integer NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    question_id INTEGER NOT NULL,
+    subtopic_id INTEGER NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -23,8 +23,8 @@ ALTER TABLE questions.question_subtopic OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.question_subtopic
-    ADD CONSTRAINT question_subtopic_pkey PRIMARY KEY (id);
+ALTER TABLE questions.question_subtopic
+    ADD CONSTRAINT pk_question_subtopic PRIMARY KEY (id);
 
 
 --
@@ -38,40 +38,40 @@ CREATE INDEX idx_question_subtopic_question_id ON questions.question_subtopic US
 
 --
 
-ALTER TABLE ONLY questions.question_subtopic
-    ADD CONSTRAINT odiseo_question_subtopic_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE questions.question_subtopic
+    ADD CONSTRAINT fk_question_subtopic_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.question_subtopic
-    ADD CONSTRAINT odiseo_question_subtopic_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE questions.question_subtopic
+    ADD CONSTRAINT fk_question_subtopic_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.question_subtopic
-    ADD CONSTRAINT odiseo_question_subtopic_question_id_foreign FOREIGN KEY (question_id) REFERENCES questions.question(id);
+ALTER TABLE questions.question_subtopic
+    ADD CONSTRAINT fk_question_subtopic_question FOREIGN KEY (question_id) REFERENCES questions.question(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.question_subtopic
-    ADD CONSTRAINT odiseo_question_subtopic_subtopic_id_foreign FOREIGN KEY (subtopic_id) REFERENCES academic.subtopic(id);
+ALTER TABLE questions.question_subtopic
+    ADD CONSTRAINT fk_question_subtopic_subtopic FOREIGN KEY (subtopic_id) REFERENCES academic.subtopic(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.question_subtopic
-    ADD CONSTRAINT odiseo_question_subtopic_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE questions.question_subtopic
+    ADD CONSTRAINT fk_question_subtopic_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

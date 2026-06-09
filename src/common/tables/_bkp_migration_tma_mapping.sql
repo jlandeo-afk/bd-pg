@@ -4,9 +4,9 @@
 --
 
 CREATE TABLE common._bkp_migration_tma_mapping (
-    old_tma_id bigint,
-    new_tma_id bigint,
-    new_tm_id integer
+    old_tma_id BIGINT,
+    new_tma_id BIGINT,
+    new_tm_id INTEGER
 );
 
 

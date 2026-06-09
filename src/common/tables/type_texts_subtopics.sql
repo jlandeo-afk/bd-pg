@@ -4,16 +4,16 @@
 --
 
 CREATE TABLE common.type_texts_subtopics (
-    id bigint NOT NULL,
-    subtopic_id bigint NOT NULL,
-    type_text_id bigint NOT NULL,
+    id BIGINT NOT NULL,
+    subtopic_id BIGINT NOT NULL,
+    type_text_id BIGINT NOT NULL,
     probability_percentage smallint DEFAULT '0'::smallint NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ
 );
 
 
@@ -23,48 +23,48 @@ ALTER TABLE common.type_texts_subtopics OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY common.type_texts_subtopics
-    ADD CONSTRAINT type_texts_subtopics_pkey PRIMARY KEY (id);
+ALTER TABLE common.type_texts_subtopics
+    ADD CONSTRAINT pk_type_texts_subtopics PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.type_texts_subtopics
-    ADD CONSTRAINT type_texts_subtopics_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE common.type_texts_subtopics
+    ADD CONSTRAINT fk_type_texts_subtopics_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.type_texts_subtopics
-    ADD CONSTRAINT type_texts_subtopics_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE common.type_texts_subtopics
+    ADD CONSTRAINT fk_type_texts_subtopics_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.type_texts_subtopics
-    ADD CONSTRAINT type_texts_subtopics_subtopic_id_foreign FOREIGN KEY (subtopic_id) REFERENCES academic.subtopic(id);
+ALTER TABLE common.type_texts_subtopics
+    ADD CONSTRAINT fk_type_texts_subtopics_subtopic FOREIGN KEY (subtopic_id) REFERENCES academic.subtopic(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.type_texts_subtopics
-    ADD CONSTRAINT type_texts_subtopics_type_text_id_foreign FOREIGN KEY (type_text_id) REFERENCES common.type_text(id);
+ALTER TABLE common.type_texts_subtopics
+    ADD CONSTRAINT fk_type_texts_subtopics_type_text FOREIGN KEY (type_text_id) REFERENCES common.type_text(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY common.type_texts_subtopics
-    ADD CONSTRAINT type_texts_subtopics_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE common.type_texts_subtopics
+    ADD CONSTRAINT fk_type_texts_subtopics_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

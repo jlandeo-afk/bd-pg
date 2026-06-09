@@ -4,9 +4,9 @@
 --
 
 CREATE TABLE auth.password_reset_tokens (
-    email character varying(255) NOT NULL,
-    token character varying(255) NOT NULL,
-    created_at timestamp(0) without time zone
+    email VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    created_at TIMESTAMPTZ
 );
 
 
@@ -16,8 +16,8 @@ ALTER TABLE auth.password_reset_tokens OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY auth.password_reset_tokens
-    ADD CONSTRAINT password_reset_tokens_pkey PRIMARY KEY (email);
+ALTER TABLE auth.password_reset_tokens
+    ADD CONSTRAINT pk_password_reset_tokens PRIMARY KEY (email);
 
 
 --

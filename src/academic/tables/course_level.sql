@@ -4,18 +4,18 @@
 --
 
 CREATE TABLE academic.course_level (
-    id bigint NOT NULL,
-    code character varying(20) NOT NULL,
-    level_id bigint,
+    id BIGINT NOT NULL,
+    code VARCHAR(20) NOT NULL,
+    level_id BIGINT,
     course_id smallint,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    course_level_nq boolean DEFAULT false NOT NULL
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    course_level_nq BOOLEAN DEFAULT false NOT NULL
 );
 
 
@@ -25,32 +25,32 @@ ALTER TABLE academic.course_level OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY academic.course_level
-    ADD CONSTRAINT course_level_pkey PRIMARY KEY (id);
+ALTER TABLE academic.course_level
+    ADD CONSTRAINT pk_course_level PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.course_level
-    ADD CONSTRAINT odiseo_course_level_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE academic.course_level
+    ADD CONSTRAINT fk_course_level_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.course_level
-    ADD CONSTRAINT odiseo_course_level_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE academic.course_level
+    ADD CONSTRAINT fk_course_level_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY academic.course_level
-    ADD CONSTRAINT odiseo_course_level_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE academic.course_level
+    ADD CONSTRAINT fk_course_level_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

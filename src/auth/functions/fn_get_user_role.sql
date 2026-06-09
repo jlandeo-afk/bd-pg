@@ -1,8 +1,8 @@
--- Function: auth.fn_find_rol_user(integer, integer)
+-- Function: auth.fn_get_user_role(integer, integer)
 
 --
 
-CREATE FUNCTION auth.fn_find_rol_user(p_user_id integer, p_company_id integer) RETURNS TABLE(id bigint, name character varying, slug character varying, fl_administrator boolean, permissions json, courses jsonb)
+CREATE FUNCTION auth.fn_get_user_role(p_user_id integer, p_company_id integer) RETURNS TABLE(id bigint, name character varying, slug character varying, fl_administrator boolean, permissions json, courses jsonb)
     LANGUAGE plpgsql
     AS $$
         DECLARE
@@ -94,6 +94,6 @@ CREATE FUNCTION auth.fn_find_rol_user(p_user_id integer, p_company_id integer) R
         $$;
 
 
-ALTER FUNCTION auth.fn_find_rol_user(p_user_id integer, p_company_id integer) OWNER TO postgres;
+ALTER FUNCTION auth.fn_get_user_role(p_user_id integer, p_company_id integer) OWNER TO postgres;
 
 --

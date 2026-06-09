@@ -4,28 +4,28 @@
 --
 
 CREATE TABLE questions.employee_didi_question (
-    id bigint NOT NULL,
-    employee_id bigint,
-    question_id bigint,
+    id BIGINT NOT NULL,
+    employee_id BIGINT,
+    question_id BIGINT,
     week smallint,
     year smallint,
-    diagrammed boolean DEFAULT false NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
-    theory_base text,
-    data_unknown text,
-    "development " text,
-    answer text,
-    url_file character varying(255),
-    url_file_digitalized_solution character varying(255),
-    url_file_digitalized_images text,
-    url_file_digitalized_solution_updated_at timestamp(0) without time zone,
-    version bigint DEFAULT '1'::bigint NOT NULL
+    diagrammed BOOLEAN DEFAULT false NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
+    theory_base TEXT,
+    data_unknown TEXT,
+    "development " TEXT,
+    answer TEXT,
+    url_file VARCHAR(255),
+    url_file_digitalized_solution VARCHAR(255),
+    url_file_digitalized_images TEXT,
+    url_file_digitalized_solution_updated_at TIMESTAMPTZ,
+    version BIGINT DEFAULT '1'::BIGINT NOT NULL
 );
 
 
@@ -35,22 +35,22 @@ ALTER TABLE questions.employee_didi_question OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question
-    ADD CONSTRAINT employee_didi_question_pkey PRIMARY KEY (id);
+ALTER TABLE questions.employee_didi_question
+    ADD CONSTRAINT pk_employee_didi_question PRIMARY KEY (id);
 
 
 --
 
 --
 
-CREATE UNIQUE INDEX employee_didi_question_question_id_unique_active ON questions.employee_didi_question USING btree (question_id) WHERE (fl_status = true);
+CREATE UNIQUE INDEX uq_employee_didi_question_question_id ON questions.employee_didi_question USING btree (question_id) WHERE (fl_status = true);
 
 
 --
 
 --
 
-CREATE INDEX idx_didi_question_active ON questions.employee_didi_question USING btree (question_id) WHERE (fl_status = true);
+CREATE INDEX idx_employee_didi_question_question_id ON questions.employee_didi_question USING btree (question_id) WHERE (fl_status = true);
 
 
 --
@@ -71,40 +71,40 @@ CREATE INDEX idx_employee_didi_question_question_id ON questions.employee_didi_q
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question
-    ADD CONSTRAINT odiseo_employee_didi_question_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE questions.employee_didi_question
+    ADD CONSTRAINT fk_employee_didi_question_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question
-    ADD CONSTRAINT odiseo_employee_didi_question_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE questions.employee_didi_question
+    ADD CONSTRAINT fk_employee_didi_question_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question
-    ADD CONSTRAINT odiseo_employee_didi_question_employee_id_foreign FOREIGN KEY (employee_id) REFERENCES odiseo.employees(id);
+ALTER TABLE questions.employee_didi_question
+    ADD CONSTRAINT fk_employee_didi_question_employee FOREIGN KEY (employee_id) REFERENCES odiseo.employees(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question
-    ADD CONSTRAINT odiseo_employee_didi_question_question_id_foreign FOREIGN KEY (question_id) REFERENCES questions.question(id);
+ALTER TABLE questions.employee_didi_question
+    ADD CONSTRAINT fk_employee_didi_question_question FOREIGN KEY (question_id) REFERENCES questions.question(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.employee_didi_question
-    ADD CONSTRAINT odiseo_employee_didi_question_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE questions.employee_didi_question
+    ADD CONSTRAINT fk_employee_didi_question_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

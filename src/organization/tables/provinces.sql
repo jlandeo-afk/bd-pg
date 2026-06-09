@@ -4,12 +4,12 @@
 --
 
 CREATE TABLE organization.provinces (
-    id bigint NOT NULL,
-    name character varying(255) NOT NULL,
-    region_id bigint NOT NULL,
-    deleted_at timestamp(0) without time zone,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    region_id BIGINT NOT NULL,
+    deleted_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ
 );
 
 
@@ -19,16 +19,16 @@ ALTER TABLE organization.provinces OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY organization.provinces
-    ADD CONSTRAINT provinces_pkey PRIMARY KEY (id);
+ALTER TABLE organization.provinces
+    ADD CONSTRAINT pk_provinces PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.provinces
-    ADD CONSTRAINT provinces_region_id_foreign FOREIGN KEY (region_id) REFERENCES organization.region(id);
+ALTER TABLE organization.provinces
+    ADD CONSTRAINT fk_provinces_region FOREIGN KEY (region_id) REFERENCES organization.region(id);
 
 
 --

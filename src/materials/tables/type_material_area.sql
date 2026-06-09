@@ -4,16 +4,16 @@
 --
 
 CREATE TABLE materials.type_material_area (
-    id bigint NOT NULL,
-    fl_status boolean DEFAULT true NOT NULL,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone,
+    id BIGINT NOT NULL,
+    fl_status BOOLEAN DEFAULT true NOT NULL,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ,
     type_material_id smallint NOT NULL,
     area_id smallint NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    deleted_by bigint
+    created_by BIGINT,
+    updated_by BIGINT,
+    deleted_by BIGINT
 );
 
 
@@ -23,48 +23,48 @@ ALTER TABLE materials.type_material_area OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY materials.type_material_area
-    ADD CONSTRAINT type_material_area_pkey PRIMARY KEY (id);
+ALTER TABLE materials.type_material_area
+    ADD CONSTRAINT pk_type_material_area PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area
-    ADD CONSTRAINT odiseo_type_material_area_area_id_foreign FOREIGN KEY (area_id) REFERENCES odiseo.exam_area(id);
+ALTER TABLE materials.type_material_area
+    ADD CONSTRAINT fk_type_material_area_area FOREIGN KEY (area_id) REFERENCES odiseo.exam_area(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area
-    ADD CONSTRAINT odiseo_type_material_area_created_by_foreign FOREIGN KEY (created_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_area
+    ADD CONSTRAINT fk_type_material_area_created_by FOREIGN KEY (created_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area
-    ADD CONSTRAINT odiseo_type_material_area_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_area
+    ADD CONSTRAINT fk_type_material_area_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area
-    ADD CONSTRAINT odiseo_type_material_area_type_material_id_foreign FOREIGN KEY (type_material_id) REFERENCES materials.type_material(id);
+ALTER TABLE materials.type_material_area
+    ADD CONSTRAINT fk_type_material_area_type_material FOREIGN KEY (type_material_id) REFERENCES materials.type_material(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.type_material_area
-    ADD CONSTRAINT odiseo_type_material_area_updated_by_foreign FOREIGN KEY (updated_by) REFERENCES auth.users(id);
+ALTER TABLE materials.type_material_area
+    ADD CONSTRAINT fk_type_material_area_updated_by FOREIGN KEY (updated_by) REFERENCES auth.users(id);
 
 
 --

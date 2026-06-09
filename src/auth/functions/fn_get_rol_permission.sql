@@ -1,8 +1,8 @@
--- Function: auth.fn_find_rol_permission(integer, integer, integer)
+-- Function: auth.fn_get_rol_permission(integer, integer, integer)
 
 --
 
-CREATE FUNCTION auth.fn_find_rol_permission(p_rol_id integer, p_permission_id integer, p_company_id integer) RETURNS TABLE(id bigint, rol_id bigint, permission_id bigint, fl_status boolean, created_by bigint, updated_by bigint, created_at timestamp without time zone, updated_at timestamp without time zone)
+CREATE FUNCTION auth.fn_get_rol_permission(p_rol_id integer, p_permission_id integer, p_company_id integer) RETURNS TABLE(id bigint, rol_id bigint, permission_id bigint, fl_status boolean, created_by bigint, updated_by bigint, created_at timestamp without time zone, updated_at timestamp without time zone)
     LANGUAGE plpgsql
     AS $$
     BEGIN
@@ -28,6 +28,6 @@ CREATE FUNCTION auth.fn_find_rol_permission(p_rol_id integer, p_permission_id in
     $$;
 
 
-ALTER FUNCTION auth.fn_find_rol_permission(p_rol_id integer, p_permission_id integer, p_company_id integer) OWNER TO postgres;
+ALTER FUNCTION auth.fn_get_rol_permission(p_rol_id integer, p_permission_id integer, p_company_id integer) OWNER TO postgres;
 
 --

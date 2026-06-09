@@ -4,19 +4,19 @@
 --
 
 CREATE TABLE materials.material_ballot_stats_global (
-    id bigint NOT NULL,
-    material_per_period_ballot_id bigint NOT NULL,
+    id BIGINT NOT NULL,
+    material_per_period_ballot_id BIGINT NOT NULL,
     number_pages smallint DEFAULT 0,
     total_questions smallint DEFAULT 0,
     new_questions smallint DEFAULT 0,
     repeated_year smallint DEFAULT 0,
     repeated_history smallint DEFAULT 0,
-    created_by integer NOT NULL,
-    updated_by integer NOT NULL,
-    deleted_by integer,
-    deleted_at timestamp without time zone,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+    created_by INTEGER NOT NULL,
+    updated_by INTEGER NOT NULL,
+    deleted_by INTEGER,
+    deleted_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -26,16 +26,16 @@ ALTER TABLE materials.material_ballot_stats_global OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY materials.material_ballot_stats_global
-    ADD CONSTRAINT material_ballot_stats_global_pkey PRIMARY KEY (id);
+ALTER TABLE materials.material_ballot_stats_global
+    ADD CONSTRAINT pk_material_ballot_stats_global PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY materials.material_ballot_stats_global
-    ADD CONSTRAINT fk_stats_global_ballot FOREIGN KEY (material_per_period_ballot_id) REFERENCES materials.material_per_period_ballot(id) ON DELETE CASCADE;
+ALTER TABLE materials.material_ballot_stats_global
+    ADD CONSTRAINT fk_material_ballot_stats_global_material_per_period_ballot FOREIGN KEY (material_per_period_ballot_id) REFERENCES materials.material_per_period_ballot(id) ON DELETE CASCADE;
 
 
 --

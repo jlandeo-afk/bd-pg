@@ -4,37 +4,37 @@
 --
 
 CREATE TABLE organization.companies (
-    id bigint NOT NULL,
-    uuid uuid NOT NULL,
-    social_reason character varying(255) NOT NULL,
-    commercial_name character varying(255) NOT NULL,
-    document_number character varying(20) NOT NULL,
-    schema character varying(255) NOT NULL,
-    address character varying(255) NOT NULL,
-    created_by bigint,
-    updated_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_by bigint,
-    deleted_at timestamp(0) without time zone,
+    id BIGINT NOT NULL,
+    UUID UUID NOT NULL,
+    social_reason VARCHAR(255) NOT NULL,
+    commercial_name VARCHAR(255) NOT NULL,
+    document_number VARCHAR(20) NOT NULL,
+    schema VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    created_by BIGINT,
+    updated_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_by BIGINT,
+    deleted_at TIMESTAMPTZ,
     type_institution_id smallint NOT NULL,
-    region_id bigint NOT NULL,
-    province_id bigint NOT NULL,
-    district_id bigint NOT NULL,
+    region_id BIGINT NOT NULL,
+    province_id BIGINT NOT NULL,
+    district_id BIGINT NOT NULL,
     contact_email odiseo.email_citext NOT NULL,
     billing_email odiseo.email_citext,
-    main_phone character varying(12) NOT NULL,
-    webpage character varying(100),
-    facebook character varying(100),
-    instagram character varying(100),
-    tiktok character varying(100),
-    number_students integer,
-    number_collaborators integer,
-    education_level character varying(50),
-    plan character varying(50),
-    plan_start_date date,
-    modality_payment character varying(50),
-    fl_active boolean DEFAULT true NOT NULL
+    main_phone VARCHAR(12) NOT NULL,
+    webpage VARCHAR(100),
+    facebook VARCHAR(100),
+    instagram VARCHAR(100),
+    tiktok VARCHAR(100),
+    number_students INTEGER,
+    number_collaborators INTEGER,
+    education_level VARCHAR(50),
+    plan VARCHAR(50),
+    plan_start_date DATE,
+    modality_payment VARCHAR(50),
+    fl_active BOOLEAN DEFAULT true NOT NULL
 );
 
 
@@ -44,48 +44,48 @@ ALTER TABLE organization.companies OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY organization.companies
-    ADD CONSTRAINT companies_pkey PRIMARY KEY (id);
+ALTER TABLE organization.companies
+    ADD CONSTRAINT pk_companies PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.companies
-    ADD CONSTRAINT companies_district_id_foreign FOREIGN KEY (district_id) REFERENCES organization.districts(id);
+ALTER TABLE organization.companies
+    ADD CONSTRAINT fk_companies_district FOREIGN KEY (district_id) REFERENCES organization.districts(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.companies
-    ADD CONSTRAINT companies_province_id_foreign FOREIGN KEY (province_id) REFERENCES organization.provinces(id);
+ALTER TABLE organization.companies
+    ADD CONSTRAINT fk_companies_province FOREIGN KEY (province_id) REFERENCES organization.provinces(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.companies
-    ADD CONSTRAINT companies_region_id_foreign FOREIGN KEY (region_id) REFERENCES organization.region(id);
+ALTER TABLE organization.companies
+    ADD CONSTRAINT fk_companies_region FOREIGN KEY (region_id) REFERENCES organization.region(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.companies
-    ADD CONSTRAINT companies_type_institution_id_foreign FOREIGN KEY (type_institution_id) REFERENCES academic.institution_types(id);
+ALTER TABLE organization.companies
+    ADD CONSTRAINT fk_companies_type_institution FOREIGN KEY (type_institution_id) REFERENCES academic.institution_types(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY organization.companies
-    ADD CONSTRAINT odiseo_companies_deleted_by_foreign FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
+ALTER TABLE organization.companies
+    ADD CONSTRAINT fk_companies_deleted_by FOREIGN KEY (deleted_by) REFERENCES auth.users(id);
 
 
 --

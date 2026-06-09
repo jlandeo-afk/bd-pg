@@ -4,20 +4,20 @@
 --
 
 CREATE TABLE questions.essential_knowledges (
-    id bigint NOT NULL,
-    code character varying(255) NOT NULL,
-    name character varying(255) NOT NULL,
-    course_id bigint NOT NULL,
-    topic_id bigint NOT NULL,
-    is_active boolean DEFAULT true NOT NULL,
-    editor_content text NOT NULL,
-    thumbnail text NOT NULL,
-    created_by bigint NOT NULL,
-    updated_by bigint,
-    deleted_by bigint,
-    created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone,
-    deleted_at timestamp(0) without time zone
+    id BIGINT NOT NULL,
+    code VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    course_id BIGINT NOT NULL,
+    topic_id BIGINT NOT NULL,
+    is_active BOOLEAN DEFAULT true NOT NULL,
+    editor_content TEXT NOT NULL,
+    thumbnail TEXT NOT NULL,
+    created_by BIGINT NOT NULL,
+    updated_by BIGINT,
+    deleted_by BIGINT,
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    deleted_at TIMESTAMPTZ
 );
 
 
@@ -27,7 +27,7 @@ ALTER TABLE questions.essential_knowledges OWNER TO postgres;
 
 --
 
-ALTER TABLE ONLY questions.essential_knowledges
+ALTER TABLE questions.essential_knowledges
     ADD CONSTRAINT essential_knowledges_code_unique UNIQUE (code);
 
 
@@ -35,24 +35,24 @@ ALTER TABLE ONLY questions.essential_knowledges
 
 --
 
-ALTER TABLE ONLY questions.essential_knowledges
-    ADD CONSTRAINT essential_knowledges_pkey PRIMARY KEY (id);
+ALTER TABLE questions.essential_knowledges
+    ADD CONSTRAINT pk_essential_knowledges PRIMARY KEY (id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.essential_knowledges
-    ADD CONSTRAINT essential_knowledges_course_id_foreign FOREIGN KEY (course_id) REFERENCES academic.course(id);
+ALTER TABLE questions.essential_knowledges
+    ADD CONSTRAINT fk_essential_knowledges_course FOREIGN KEY (course_id) REFERENCES academic.course(id);
 
 
 --
 
 --
 
-ALTER TABLE ONLY questions.essential_knowledges
-    ADD CONSTRAINT essential_knowledges_topic_id_foreign FOREIGN KEY (topic_id) REFERENCES academic.topic(id);
+ALTER TABLE questions.essential_knowledges
+    ADD CONSTRAINT fk_essential_knowledges_topic FOREIGN KEY (topic_id) REFERENCES academic.topic(id);
 
 
 --

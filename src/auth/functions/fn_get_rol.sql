@@ -1,8 +1,8 @@
--- Function: auth.fn_find_rol(integer, integer)
+-- Function: auth.fn_get_rol(integer, integer)
 
 --
 
-CREATE FUNCTION auth.fn_find_rol(p_rol_id integer, p_company_id integer) RETURNS TABLE(id bigint, name character varying, slug character varying, description text, fl_status boolean, created_by bigint, updated_by bigint, deleted_by bigint, created_at timestamp without time zone, updated_at timestamp without time zone, deleted_at timestamp without time zone, permissions json)
+CREATE FUNCTION auth.fn_get_rol(p_rol_id integer, p_company_id integer) RETURNS TABLE(id bigint, name character varying, slug character varying, description text, fl_status boolean, created_by bigint, updated_by bigint, deleted_by bigint, created_at timestamp without time zone, updated_at timestamp without time zone, deleted_at timestamp without time zone, permissions json)
     LANGUAGE plpgsql
     AS $$
     BEGIN
@@ -44,6 +44,6 @@ CREATE FUNCTION auth.fn_find_rol(p_rol_id integer, p_company_id integer) RETURNS
     $$;
 
 
-ALTER FUNCTION auth.fn_find_rol(p_rol_id integer, p_company_id integer) OWNER TO postgres;
+ALTER FUNCTION auth.fn_get_rol(p_rol_id integer, p_company_id integer) OWNER TO postgres;
 
 --
